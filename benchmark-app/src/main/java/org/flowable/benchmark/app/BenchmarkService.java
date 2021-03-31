@@ -65,8 +65,8 @@ public class BenchmarkService implements CommandLineRunner, ApplicationContextAw
         if (processes.isEmpty()) {
             processes = benchmarkRunnableMap.keySet();
         }
-        logger.info("Running 1000 iterations for warming up JVM");
-        executeBenchmark(minNrOfThreads, maxNrOfThreads, 1000, processes);
+        logger.info("Running 10 iterations for warming up JVM");
+        executeBenchmark(minNrOfThreads, maxNrOfThreads, 10, processes);
         logger.info("JVM warmup done");
         logger.info("Running Benchmark with {} iterations for processes {}", nrOfIterations, processes);
         Output output = executeBenchmark(minNrOfThreads, maxNrOfThreads, nrOfIterations, processes);
@@ -138,29 +138,38 @@ public class BenchmarkService implements CommandLineRunner, ApplicationContextAw
 
     protected void dropCreateDb() {
         processEngine.getProcessEngineConfiguration().getAsyncExecutor().shutdown();
-        processEngine.getManagementService()
-            .executeCommand(commandContext -> {
-                org.flowable.eventregistry.impl.util.CommandContextUtil.getEventRegistryConfiguration(commandContext)
-                    .getSchemaManager()
-                    .schemaDrop();
-                return null;
-            });
+        // processEngine.getManagementService()
+        //     .executeCommand(commandContext -> {
+        //         org.flowable.eventregistry.impl.util.CommandContextUtil.getEventRegistryConfiguration(commandContext)
+        //             .getSchemaManager()
+        //             .schemaDrop();
+        //         return null;
+        //     });
 
-        processEngine.getManagementService()
-            .executeCommand(commandContext -> {
-                SchemaManager schemaManager = CommandContextUtil.getProcessEngineConfiguration(commandContext)
-                    .getSchemaManager();
-                schemaManager.schemaCreate();
+        // processEngine.getManagementService()
+        //     .executeCommand(commandContext -> {
+        //         org.flowable.eventregistry.impl.util.CommandContextUtil.getEventRegistryConfiguration(commandContext)
+        //             .getSchemaManager()
+        //             .schemaDrop();
+        //         return null;
+        //     });
 
-                org.flowable.idm.engine.impl.util.CommandContextUtil.getIdmEngineConfiguration(commandContext)
-                    .getSchemaManager()
-                    .schemaCreate();
+        // processEngine.getManagementService()
+        //     .executeCommand(commandContext -> {
+        //         SchemaManager schemaManager = CommandContextUtil.getProcessEngineConfiguration(commandContext)
+        //             .getSchemaManager();
+        //         schemaManager.schemaCreate();
 
-                org.flowable.eventregistry.impl.util.CommandContextUtil.getEventRegistryConfiguration(commandContext)
-                    .getSchemaManager()
-                    .schemaCreate();
-                return null;
-            });
+        //         org.flowable.idm.engine.impl.util.CommandContextUtil.getIdmEngineConfiguration(commandContext)
+        //             .getSchemaManager()
+        //             .schemaCreate();
+
+        //         org.flowable.eventregistry.impl.util.CommandContextUtil.getEventRegistryConfiguration(commandContext)
+        //             .getSchemaManager()
+        //             .schemaCreate();
+        //         return null;
+        //     });
+
         processEngine.getProcessEngineConfiguration().getAsyncExecutor().start();
     }
 

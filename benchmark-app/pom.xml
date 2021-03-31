@@ -12,22 +12,23 @@
     <artifactId>benchmark-app</artifactId>
 
     <properties>
-        <flowable.version>6.5.1-SNAPSHOT</flowable.version>
+        <flowable.version>6.6.0</flowable.version>
     </properties>
 
     <dependencies>
-        <dependency>
+        <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-json</artifactId>
+        </dependency> -->
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
         </dependency>
         <dependency>
             <groupId>org.flowable</groupId>
@@ -36,7 +37,7 @@
         </dependency>
         <dependency>
             <groupId>org.flowable</groupId>
-            <artifactId>flowable-http</artifactId>
+            <artifactId>flowable-form-engine</artifactId>
             <version>${flowable.version}</version>
         </dependency>
 
@@ -61,6 +62,15 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.yugabyte</groupId>
+            <artifactId>jdbc-yugabytedb</artifactId>
+            <version>42.2.7-yb-3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
     </dependencies>
 
